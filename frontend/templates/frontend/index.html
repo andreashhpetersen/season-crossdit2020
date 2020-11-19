@@ -1,0 +1,33 @@
+{% extends 'frontend/base.html' %}
+{% load static %}
+
+{% block main_content %}
+
+    <div class="analysis-content-container">
+        <div class="heading-container">
+            <h2>Area card for <span>{{ field }}</span></h2>
+        </div>
+
+        <div class="year-selector-container">
+            {% for year in field.years %}
+                <div class="year-selector-item {% if forloop.first %}selected{% endif %}">
+                    {{ year }}
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="field-analysis-ajax-wrap">
+            {% include 'frontend/field_analysis.html' %}
+        </div>
+
+        <div class="results-ajax-wrap">
+            {% include 'frontend/results.html' %}
+        </div>
+
+    </div>
+
+    <div class="analysis-field-image-container" style="background-image: url('{% static 'frontend/icons/fields_placeholder.jpg' %}');">
+    </div>
+
+
+{% endblock %}

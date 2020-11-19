@@ -1,0 +1,44 @@
+{% load frontend_tags %}
+
+<div class="results-container">
+    <div class="half-container">
+        <div class="projection-container crop-type">
+            <div class="projection-heading-container">
+                <h6>Recommended</h6>
+                <h4>Crop</h4>
+            </div>
+            <div class="result">
+                <img src="{{ results.crop.img.url }}" alt="">
+                <h4>{{ results.crop }}</h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="half-container">
+        <div class="vertical-split-container">
+            <div class="projection-container income">
+                <div class="projection-heading-container">
+                    <h6>Projection</h6>
+                    <h4>Income</h4>
+                </div>
+                <div class="result">
+                    <h4>{{ results.income|thousands }} kr.</h4>
+                    <span><i>Based on <strong>https://ec.europa.eu/info/food-farming-fisheries/trade/agriculture-markets-and-prices_en</strong></i></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="vertical-split-container">
+            <div class="projection-container yield">
+                <div class="projection-heading-container">
+                    <h6>Projection</h6>
+                    <h4>Yield</h4>
+                </div>
+                <div class="result">
+                    <h4>{{ results.total_yield|floatformat }}</h4> <span>ton</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

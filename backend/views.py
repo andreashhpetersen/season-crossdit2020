@@ -1,25 +1,38 @@
 import os
 import logging
 from django.shortcuts import render
-from django.http import HttpResponse
-from django.views.generic import View
+from django.http import HttpResponse, JsonResponse
+from django.template.loader import render_to_string
+from django.views.generic.base import TemplateView
 from django.conf import settings
 
+from backend.models import Field
 
-class FrontendAppView(View):
-    index_file_path = os.path.join(settings.REACT_APP_DIR, 'build', 'index.html')
+
+class IndexView(TemplateView):
+    template_name = 'frontend/index.html'
 
     def get(self, request):
-        try:
-            with open(self.index_file_path) as f:
-                return HttpResponse(f.read())
-        except FileNotFoundError:
-            logging.exception('Production build of app not found')
-            return HttpResponse(
-                '''
-                This URL is only used when you have built the production
-                version of the app. Visit http://localhost:3000/ instead after
-                running `yarn start` on the frontend/ directory
-                ''',
-                status=501
-            )
+        if request.is_ajax():
+            return self.ajax_response(request)
+
+        field = Field.objects.first()
+        analysis_data = field.analysis.order_by('-year').first()
+        result_data = analysis_data.get_results()
+        context = { 'field': field, 'data': analysis_data, 'results': result_data }
+        return render(request, self.template_name, context)
+
+    def ajax_response(self, request):
+        field = Field.objects.get(name=request.GET['field'])
+        year = int(request.GET['year'])
+        analysis_data = field.analysis.get(year=year)
+        result_data = analysis_data.get_results()
+
+        analysis_html = render_to_string('frontend/field_analysis.html', {
+            'data': analysis_data
+        })
+        result_html = render_to_string('frontend/results.html', {
+            'results': result_data
+        })
+
+        return JsonResponse({ 'analysis': analysis_html, 'results': result_html })

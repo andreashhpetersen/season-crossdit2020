@@ -1,0 +1,58 @@
+{% load static frontend_tags %}
+
+<div class="field-analysis-container">
+    <div class="content-wrapper">
+        <h3>Field analysis</h3>
+        <div class="data-container">
+
+            <div class="data-item">
+                <h6>Hectars</h6>
+                <div class="data-content">
+                    <img src="{% static 'frontend/icons/hectars.png' %}" alt="">
+                    <span>{{ data.hectars }}</span>
+                </div>
+            </div>
+
+            <div class="data-item">
+                <h6>Nitrogen</h6>
+                <div class="data-content">
+                    <img src="{% static 'frontend/icons/nitrogen.png' %}" alt="">
+                    <span>{{ data.nitrogen }} ppm</span>
+                </div>
+            </div>
+
+            <div class="data-item">
+                <h6>Moisture</h6>
+                <div class="data-content">
+                    <img src="{% static 'frontend/icons/moisture.png' %}" alt="">
+                    <span>{{ data.moisture|percentage|floatformat }}%</span>
+                </div>
+            </div>
+
+            <div class="data-item">
+                <h6>Soil type</h6>
+                <div class="data-content">
+                    <img src="{% static 'frontend/icons/soil_type.png' %}" alt="">
+                    <span>{{ data.soil_type }}</span>
+                </div>
+            </div>
+
+            <div class="data-item">
+                <h6>Daily sunlight</h6>
+                <div class="data-content">
+                    <img src="{% static 'frontend/icons/daily_sunlight.png' %}" alt="">
+                    <span>{{ data.daily_sunlight|floatformat }} hours</span>
+                </div>
+            </div>
+
+            <div class="data-item">
+                <h6>Avg. temperature</h6>
+                <div class="data-content">
+                    <img src="{% static 'frontend/icons/temperature.png' %}" alt="">
+                    <span>{{ data.avg_temperature }} &deg;C</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
