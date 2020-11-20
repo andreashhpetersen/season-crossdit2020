@@ -7,7 +7,6 @@ var setMainMargin = function() {
 
 
 $(document).ready(function() {
-    setMainMargin();
 
     $(window).resize(function() {
         setMainMargin();
@@ -31,4 +30,6 @@ $(document).ready(function() {
             }
         });
     });
+
+    setMainMargin();
 });
