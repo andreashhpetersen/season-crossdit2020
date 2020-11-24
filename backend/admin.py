@@ -1,5 +1,5 @@
 from django.contrib import admin
-from backend.models import Field, FieldAnalysis, Crop
+from backend.models import Field, FieldAnalysis, Crop, Monitoring
 
 
 @admin.register(Field)
@@ -14,3 +14,5 @@ class FieldAnalysisAdmin(admin.ModelAdmin):
 @admin.register(Crop)
 class CropAdmin(admin.ModelAdmin):
     pass
+
+admin.site.register(Monitoring)

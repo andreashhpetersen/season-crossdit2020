@@ -232,3 +232,81 @@ h1, h2, h3, h4, h5, h6, p, div {
         padding-left: 0;
     }
 }
+
+.soil-report-container {
+    margin-top: 20px;
+
+    .soil-report-header {
+        div {
+            display: inline-block;
+            width: 32%;
+        }
+
+        .action-container {
+            border: 2px solid #66A8A9;
+            border-radius: 26px;
+            padding: 3px 20px;
+            text-align: center;
+        }
+
+        .action-container.send {
+            border: 2px solid #394F4F;
+            background-color: #394F4F;
+            color: #FFF;
+        }
+
+        .action-container:hover {
+            cursor: pointer;
+        }
+    }
+
+    .soil-measurement-list {
+        margin-top: 10px;
+
+        .soil-list-header {
+            background: linear-gradient(180deg, #1B5D5F 0%, #014446 100%);
+            padding: 7px 10px;
+            border-radius: 10px;
+
+            div {
+                display: inline-block;
+                font-family: 'Lato', sans-serif;
+                font-size: 14px;
+            }
+
+            .data-header {
+                color: #fff;
+            }
+
+            .data-type {
+                float: right;
+
+                select {
+                    background-color: transparent;
+                    border: none;
+                    color: #F8C438;
+                }
+            }
+        }
+
+        .soil-list-item {
+            display: flex;
+            padding: 10px 10px;
+
+            div {
+                width: 33%;
+                font-size: 14px;
+            }
+
+            .measurement-registration-type {
+                text-align: center;
+                font-style: italic;
+            }
+
+            .measurement-value {
+                text-align: right;
+            }
+        }
+    }
+}
+

@@ -19,7 +19,12 @@ class IndexView(TemplateView):
         field = Field.objects.first()
         analysis_data = field.analysis.order_by('-year').first()
         result_data = analysis_data.get_results()
-        context = { 'field': field, 'data': analysis_data, 'results': result_data }
+        context = {
+            'field': field,
+            'data': analysis_data,
+            'results': result_data,
+            'measurements': analysis_data.monitoring_set.all()
+        }
         return render(request, self.template_name, context)
 
     def ajax_response(self, request):
@@ -34,5 +39,12 @@ class IndexView(TemplateView):
         result_html = render_to_string('frontend/results.html', {
             'results': result_data
         })
+        measurements_html = render_to_string('frontend/soil-report.html', {
+            'measurements': analysis_data.monitoring_set.all()
+        })
 
-        return JsonResponse({ 'analysis': analysis_html, 'results': result_html })
+        return JsonResponse({
+            'analysis': analysis_html,
+            'results': result_html,
+            'measurements': measurements_html
+        })

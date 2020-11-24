@@ -62,6 +62,7 @@ class Crop(models.Model):
 
 
 class Result(models.Model):
+    finished = models.BooleanField(default=True)
     crop = models.ForeignKey(Crop, on_delete=models.SET_NULL, null=True)
     income = models.IntegerField()
     total_yield = models.FloatField()
@@ -77,3 +78,35 @@ class Result(models.Model):
 
     def __str__(self):
         return f'Result for {self.field} ({self.year})'
+
+
+class Monitoring(models.Model):
+    NUTRIENT_TYPE_CHOICES = (
+        (1, 'Nitrogen'),
+        (2, 'Phosphorus'),
+        (3, 'Magnesium'),
+    )
+
+    REGISTRATION_CHOICES = (
+        (1, 'Automatic'),
+        (2, 'Manual'),
+    )
+
+    nutrient_type = models.IntegerField(
+        choices=NUTRIENT_TYPE_CHOICES,
+        default=1
+    )
+    registration_type = models.IntegerField(
+        choices=REGISTRATION_CHOICES,
+        default=1
+    )
+    value = models.FloatField()
+    date = models.DateTimeField()
+    analysis = models.ForeignKey(
+        FieldAnalysis,
+        on_delete=models.SET_NULL,
+        null=True
+    )
+
+    def __str__(self):
+        return f'{self.nutrient_type} measurement for {self.analysis.field}'

@@ -1,0 +1,47 @@
+{% load static %}
+
+<div class="soil-report-container">
+    <div class="soil-report-header">
+        <div class="title-container">
+            <h3>Soil report</h3>
+        </div>
+
+        <div class="action-container print">
+            Print report
+        </div>
+
+        <div class="action-container send">
+            Send report
+        </div>
+    </div>
+
+    <div class="soil-measurement-list">
+        <div class="soil-list-header">
+            <div class="data-header">
+                Monitoring
+            </div>
+
+            <div class="data-type">
+                <select name="monitoring" id="monitoring">
+                    <option>Nitrogen</option>
+                    <option>Phosphorus</option>
+                    <option>Magnesium</option>
+                </select>
+            </div>
+        </div>
+
+        {% for measurement in measurements %}
+            <div class="soil-list-item">
+                <div class="measurement-date">
+                    {{ measurement.date|date:"M jS" }}, {{ measurement.date|time:"f" }}
+                </div>
+                <div class="measurement-registration-type">
+                    {{ measurement.get_registration_type_display }}
+                </div>
+                <div class="measurement-value">
+                    {{ measurement.value }} kg/sqh
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
