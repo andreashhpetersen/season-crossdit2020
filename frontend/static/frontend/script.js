@@ -27,6 +27,7 @@ $(document).ready(function() {
             success: function(res) {
                 $('.field-analysis-ajax-wrap').html(res['analysis']);
                 $('.results-ajax-wrap').html(res['results']);
+                $('.soil-report-ajax-wrap').html(res['measurements']);
             }
         });
     });
